@@ -18,7 +18,6 @@ tender.db
 # ===== 构建产物（体积大，由 PyInstaller 重新生成） =====
 dist/
 build/
-*.spec
 _ARCHIVE/
 _obsolete_*/
 
