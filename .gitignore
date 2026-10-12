@@ -1,0 +1,30 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# ===== 虚拟环境 =====
+venv/
+.venv/
+env/
+
+# ===== 应用数据（用户台账，含隐私，禁止入库） =====
+tender.db
+*.db
+*.sqlite
+*.sqlite3
+
+# ===== 构建产物（体积大，由 PyInstaller 重新生成） =====
+dist/
+build/
+*.spec
+_ARCHIVE/
+_obsolete_*/
+
+# ===== 临时脚本 =====
+_*.py
+
+# ===== 编辑器 / IDE =====
+.vscode/
+.idea/
