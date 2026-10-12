@@ -34,8 +34,14 @@ from config import COLORS
 from ui.styles import MODERN_QSS
 from ui.app import MainWindow
 
+# 👇 新增导入
+from database import init_db
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+
+    # 👇 关键修复：在启动 UI 之前，强制初始化数据库（建表）
+    init_db()
 
     # 应用图标：源码运行取脚本目录；打包后优先取 exe 同目录，
     # 再回退到 _internal（PyInstaller onedir 的 --add-data 落点）。
