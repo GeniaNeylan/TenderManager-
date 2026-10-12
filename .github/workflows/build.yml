@@ -1,4 +1,4 @@
-name: Build Desktop App
+name: Build Windows EXE
 
 on:
   workflow_dispatch:
@@ -11,11 +11,7 @@ permissions:
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
 
     steps:
       - name: Checkout
@@ -35,33 +31,14 @@ jobs:
       - name: Build with PyInstaller
         run: pyinstaller TenderManager.spec
 
-      # Windows 打包结果
-      - name: Upload Windows EXE
-        if: matrix.os == 'windows-latest'
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: TenderManager-Windows
           path: dist/*.exe
 
-      # Mac 打包结果（Mac 需要压缩成 zip 才能上传）
-      - name: Package Mac App
-        if: matrix.os == 'macos-latest'
-        run: |
-          cd dist
-          zip -r TenderManager-Mac.zip TenderManager.app
-
-      - name: Upload Mac App
-        if: matrix.os == 'macos-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: TenderManager-Mac
-          path: dist/TenderManager-Mac.zip
-
-      # 发布 Release
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            dist/TenderManager.exe
-            dist/TenderManager.zip
+          files: dist/*.exe
