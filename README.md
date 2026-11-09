@@ -146,4 +146,4 @@ copy tender.db dist\TenderManager\tender.db
 
 ---
 
-Made with PySide6 · 让招投标台账管理更轻松。
+Made with PySide6 · Workbuddy · Deepseek · VScode 😜。
